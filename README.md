@@ -3,6 +3,12 @@
 Para esta serie, se debía realizar una máquina de estados finitos dependiendo de los estados que se presentan en esta imagen. 
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/4f5b320c-7d37-4536-957a-e6c6e32685a1)
 
+Ahora, al tener que agregarle algo único por estudiante, se le agregó otro estado S4, el cual pone ambos semáforos en rojo al presionar la entrada R. El diagrama quedaría de esta manera ya con el nuevo estado S4 agregado:
+
+
+![Diagrama de estados](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/23dcff8b-8e3f-4a5a-9d4c-cfbd09c8e89e)
+
+
 ## Serie 3 - Segundo parcial
 
 #### RTL code
