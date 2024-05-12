@@ -21,10 +21,12 @@ En este paso, se realiza la programación en HDL describiendo la lógica que tie
 
 
 #### RTL Simulation
-Para este paso, se realizó otro código distinto a los descritos anteriormente, en el que se relacionan las variables puestas en el código principal, con los valores que pueden tomar para observar su funcionamiento. A la hora de poder realizar la simulación, se puede observar también el esquemático de la FSM programada. En la simulación podemos observar como es que van cambiando los valores de las salidas (los colores de los semáforos de la avenida y del boulevard) dependiendo del valor que toman nuestras entradas (TA, TB y E).
+Para este paso, se realizó otro código distinto a los descritos anteriormente, en el que se relacionan las variables puestas en el código principal, con los valores que pueden tomar para observar su funcionamiento. A la hora de poder realizar la simulación, se puede observar también el esquemático de la FSM programada. En la simulación podemos observar como es que van cambiando los valores de las salidas (los colores de los semáforos de la avenida y del boulevard) dependiendo del valor que toman nuestras entradas (TA, TB, E y R).
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/5722dc12-0fab-4cd7-b869-ddfedc7f9fe7)
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/6fa0ea03-d8ab-4e72-b8d8-727fbb8fb044)
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/be40298b-2fa8-4472-8854-46770c0730f0)
+![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/558eab43-a56d-4e09-a099-3759e2989e2a)
+
 
 #### Synthesis
 En este paso, se muestran la conversión del código a nivel de compuertas y flip-flops, con lo que se puede ver también cuales están activadas y su conectividad. Se pueden ver todos los MUX y Flip-Flop usados para el funcionamiento de la FSM. Como se puede observar, las compuertas y demás componentes utilizados están marcados en color naranja.
@@ -34,11 +36,13 @@ En este paso, se muestran la conversión del código a nivel de compuertas y fli
 
 #### Implementation
 En este paso, se muestran como tal las conexiones y enrutamientos de todos los componentes con las entradas y salidas correspondientes, o bien, las conexiones entre las compuertas y los flip-flops utilizados. 
+
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/c1966023-f827-4221-a8c3-60403a2251a2)
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/caee2e6e-2ab9-42ea-bdad-1d1206f4d482)
 
 #### Static Time Analysis
 Este paso ayuda a analizar el comportamiento de la lógica de nuestra máquina de estados finitos y del comportamiento de nuestras salidas (luces del semáforo) con respecto a las entradas (TA, TB y E), en determinados períodos de tiempo. En la simulación se puede observar como cambian los valores tanto de las entradas como de las salidas, conforme los rangos de tiempo. 
+
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/41388b03-d719-4d4d-98d2-d877b65dbb79)
 ![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/d607ba93-6218-4a66-9996-22bee76c55fa)
 
@@ -49,6 +53,7 @@ En este paso, se conectó la placa Basys 3 a la computadora y se le cargó el c�
 ## Video y material adicional
 
 Video: https://youtu.be/Q8Y9xtTbnmw
+Video del programa corregido con el nuevo estado agregado: https://youtu.be/5izEg1abIrg
 Material adicional: https://drive.google.com/drive/folders/1etB-zn321L3k2wnDE-NTn1UZH6quqibT?usp=sharing
 
 
