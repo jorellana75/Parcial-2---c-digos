@@ -22,11 +22,11 @@
 
 module fsm_semaforo(
 
-    input logic clk,        //Señal para el reloj
+    input logic clk,        //SeÃ±al para el reloj
     input logic reset,      //Reset
-    input logic TA,TB,E,    //Entradas a usar, en este caso TA, TB , y la especial E
+    input logic TA,TB,E,R,    //Entradas a usar, en este caso TA, TB , la de emergencia y la adicional R
     
-    //Se definen las salidas para las luces de los semáforos de la Avenida (posición 0) y el Boulevard (posición 1)
+    //Se definen las salidas para las luces de los semÃ¡foros de la Avenida (posiciÃ³n 0) y el Boulevard (posiciÃ³n 1)
     output logic [1:0] verde,
     output logic [1:0] amarillo,
     output logic [1:0] rojo
@@ -34,12 +34,13 @@ module fsm_semaforo(
     );
     
     
-    //Esta función se utiliza para poder definir los estados correspondientes a los bits que los representan a cada uno, según la tabla de los estados
+    //Esta funciÃ³n se utiliza para poder definir los estados correspondientes a los bits que los representan a cada uno, segÃºn la tabla de los estados
     typedef enum logic [2:0]{
-        S0 = 2'b00,
-        S1 = 2'b01,
-        S2 = 2'b10,
-        S3 = 2'b11
+        S0 = 3'b000,
+        S1 = 3'b001,
+        S2 = 3'b010,
+        S3 = 3'b011,
+        S4 = 3'b100
         } estado;
         
         //Las variables de estado actual y de estado siguiente pueden tomar los valores de la variable 'estado'
@@ -54,44 +55,57 @@ module fsm_semaforo(
                 estado_actual <= estado_siguiente;
         end
     
-    //Se indicarán cuales serán los valores para estado siguiente según el valor de las entradas
+    //Se indicarÃ¡n cuales serÃ¡n los valores para estado siguiente segÃºn el valor de las entradas
     always_comb
     begin
         case(estado_actual)
             S0: begin
                 if(TA) estado_siguiente = S0; 
-                if(~TA) estado_siguiente = S1;                          //Si TA es 1, entonces se quedará en estado S0, pero si es 0 o negada, pasará a S1
+                if(~TA) estado_siguiente = S1;                          //Si TA es 1, entonces se quedarÃ¡ en estado S0, pero si es 0 o negada, pasarÃ¡ a S1
                 if(E) estado_siguiente = S0;
+                if(R) estado_siguiente = S4;                            //Si se presiona R, pasarÃ¡ al estado S4
             end
             
             S1: begin
-                estado_siguiente = S2;                                          //El estado siguiente a estar en S1 será S2
-                if(E) estado_siguiente = S0;                                    //Si a entrada E es 1, entonces regresará al estado S0
+                estado_siguiente = S2;                                          //El estado siguiente a estar en S1 serÃ¡ S2
+                if(E) estado_siguiente = S0;                                    //Si a entrada E es 1, entonces regresarÃ¡ al estado S0
+                if(R) estado_siguiente = S4;                                    //Si se presiona R, pasarÃ¡ al estado S4
             end
             
             S2: begin
                 if(TB) estado_siguiente = S2; 
-                if(~TB) estado_siguiente = S3;                          //Si TB es 0, entonces pasará al estado S3, de lo contrario se quedará en S2
-                if(E) estado_siguiente = S0;                                     //Si la entrada E es 1, entonces regresará al estado S0
+                if(~TB) estado_siguiente = S3;                          //Si TB es 0, entonces pasarÃ¡ al estado S3, de lo contrario se quedarÃ¡ en S2
+                if(E) estado_siguiente = S0;                                     //Si la entrada E es 1, entonces regresarÃ¡ al estado S0
+                if(R) estado_siguiente = S4;                            //Si se presiona R, pasarÃ¡ al estado S4
             end
             
             S3: begin
              //El estado siguiente al estar en S3 es S0
                 if(E) estado_siguiente = S1;
-                if(~E) estado_siguiente = S0;               //Si la entrada E es 1, entonces regresará al estado S1. Esta parte es la agregada al sistema
-                                                            //Si no se recibe señal en E, entonces seguirá el camino normal, que sería regresar a S0
+                if(~E) estado_siguiente = S0;               //Si la entrada E es 1, entonces regresarÃ¡ al estado S1. Esta parte es la agregada al sistema
+                                                            //Si no se recibe seÃ±al en E, entonces seguirÃ¡ el camino normal, que serÃ­a regresar a S0
+                if(R) estado_siguiente = S4;                //Si se presiona R, pasarÃ¡ al estado S4
+                //if(~R) estado_siguiente = S0;                                            
+            end
+            
+            S4: begin
+                
+                if(R) estado_siguiente = S4;                //Se le agregÃ³ este nuevo estado, en donde si se presiona R, pasarÃ¡ al estado S4
+                if(~R) estado_siguiente = S0;                   //el cual pone en rojo la avenida y el Boulevard
+
+            
             end
             
             default: estado_siguiente = S0;
          endcase
       end
       
-      assign verde[0] = (estado_actual == S0);                              //Verde Avenida
-      assign verde[1] = (estado_actual == S2);                              //Verde Boulebard
-      assign amarillo[0]= (estado_actual == S1);                            //Amarillo Avenida
-      assign amarillo[1] = (estado_actual == S3);                           //Amarillo Boulevard
-      assign rojo[0] = (estado_actual == S3) || (estado_actual == S2);      //Rojo Avenida
-      assign rojo[1]= (estado_actual == S0) || (estado_actual == S1);       //Rojo Boulevard
+      assign verde[0] = (estado_actual == S0);                                                      //Verde Avenida
+      assign verde[1] = (estado_actual == S2);                                                      //Verde Boulebard
+      assign amarillo[0]= (estado_actual == S1);                                                    //Amarillo Avenida
+      assign amarillo[1] = (estado_actual == S3);                                                   //Amarillo Boulevard
+      assign rojo[0] = (estado_actual == S3) || (estado_actual == S2) || (estado_actual == S4);     //Rojo Avenida
+      assign rojo[1]= (estado_actual == S0) || (estado_actual == S1) || (estado_actual == S4);      //Rojo Boulevard
   
     
 endmodule
