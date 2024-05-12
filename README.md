@@ -13,9 +13,12 @@ Ahora, al tener que agregarle algo único por estudiante, se le agregó otro est
 
 #### RTL code
 En este paso, se realiza la programación en HDL describiendo la lógica que tiene nuestra FSM, indicando cómo es que se pasará a los siguientes estados y dependiendo de cómo se comporten las entradas. En este caso, se realizó un código en dónde se establecen distintos casos para determinar cada estado y cómo es que van a ir cambiando, los cuales se encuentran dentro de la función “always_comb” la cual describe como tal la lógica de la FSM.
-![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/c8633ce0-da02-4b2a-98d8-4f6dd4e0afd1)
-![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/6c6af898-64de-4940-96cd-2eb05cbd241d)
-![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/2448e096-6c3a-409e-aa0e-f907e2b614c9)
+
+![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/2888f5b4-2910-4a59-98db-f8667aa48c30)
+![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/0637fffa-210b-4e65-b619-1b952977121e)
+![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/caaf65e1-c9a0-4401-8ee3-9fa5af5f2620)
+![image](https://github.com/jorellana75/Parcial-2---c-digos/assets/162061174/79603330-6347-42bb-8307-cadc33a3dee1)
+
 
 #### RTL Simulation
 Para este paso, se realizó otro código distinto a los descritos anteriormente, en el que se relacionan las variables puestas en el código principal, con los valores que pueden tomar para observar su funcionamiento. A la hora de poder realizar la simulación, se puede observar también el esquemático de la FSM programada. En la simulación podemos observar como es que van cambiando los valores de las salidas (los colores de los semáforos de la avenida y del boulevard) dependiendo del valor que toman nuestras entradas (TA, TB y E).
