@@ -27,18 +27,20 @@ module fsm_semaforo_simulacion;
     logic TA;
     logic TB;
     logic E;
+    logic R;
 
     logic [1:0] verde;
     logic [1:0] amarillo;
     logic [1:0] rojo;
 
-    //Instanciación para nuestro código principal
+    //InstanciaciÃ³n para nuestro cÃ³digo principal
     fsm_semaforo dut(
         .clk(clk),
         .reset(reset),
         .TA(TA),
         .TB(TB),
         .E(E),
+        .R(R),
         
         .verde({verde[1], verde[0]}), 
         .amarillo({amarillo[1], amarillo[0]}), 
@@ -46,20 +48,21 @@ module fsm_semaforo_simulacion;
     );
 
     initial begin
-        reset <= 1; #30;                                //Inicializa el reset en 1
-        #30;                                            //espera 30 unidades de tiempo para cambiar de valor a las establecidas a continuación
-        reset <= 0; TA <= 1; TB <= 0; E <= 0; #30;
-        reset <= 0; TA <= 0; TB <= 1; E <= 0; #30;
-        reset <= 0; TA <= 1; TB <= 0; E <= 0; #30;
-        reset <= 0; TA <= 0; TB <= 1; E <= 0; #30;
-        reset <= 0; TA <= 0; TB <= 0; E <= 1; #30;
-        reset <= 0; TA <= 0; TB <= 1; E <= 0; #30;
-        reset <= 0; TA <= 1; TB <= 0; E <= 0; #30;
+        reset <= 1; #30;                                    //Inicializa el reset en 1
+        #30;                                                //espera 30 unidades de tiempo para cambiar de valor a las establecidas a continuaciÃ³n
+        reset <= 0; TA <= 1; TB <= 0; R <= 0; E <= 0; #30;
+        reset <= 0; TA <= 0; TB <= 1; R <= 0; E <= 0; #30;
+        reset <= 0; TA <= 1; TB <= 0; R <= 0; E <= 0; #30;
+        reset <= 0; TA <= 0; TB <= 1; R <= 0; E <= 0; #30;
+        reset <= 0; TA <= 0; TB <= 0; R <= 0; E <= 1; #30;
+        reset <= 0; TA <= 0; TB <= 1; R <= 0; E <= 0; #30;
+        reset <= 0; TA <= 0; TB <= 0; R <= 1; E <= 0; #30;
+        reset <= 0; TA <= 1; TB <= 0; R <= 0; E <= 0; #30;
 
     end
 
     always begin
-        clk <= 1; #10;              //Define el bucle siempre activo que controla la señal del reloj
+        clk <= 1; #10;              //Define el bucle siempre activo que controla la seÃ±al del reloj
         clk <= 0; #10;
     end
 
